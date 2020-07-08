@@ -98,7 +98,7 @@ export FZF_CTRL_T_COMMAND='rg --files 2> /dev/null'
 export FZF_DEFAULT_OPTS='--height 40%'
 export FZF_CTRL_T_OPTS='--height 40%'
 
-ZSH_THEME="agnoster"
+# ZSH_THEME="agnoster"
 
 source $ZSH/oh-my-zsh.sh
 
