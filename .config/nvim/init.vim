@@ -26,6 +26,9 @@ set go=a
 set mouse=a
 set nohlsearch
 set clipboard+=unnamedplus
+colorscheme gruvbox
+set background=dark
+set cursorline
 
 " Some basics:
 	nnoremap c "_c

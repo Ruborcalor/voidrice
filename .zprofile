@@ -6,13 +6,31 @@
 # to clean up.
 
 # Adds `~/.local/bin` to $PATH
-export PATH="$PATH:$(du "$HOME/.local/bin/" | cut -f2 | paste -sd ':')"
+PATH="$PATH:$(du "$HOME/.local/bin/" | cut -f2 | paste -sd ':')"
+
+PATH="$PATH:$HOME/.local/bin/scripts"
+PATH="$PATH:/root/.local/bin"
+PATH=~/.npm-global/bin:$PATH
+PATH=$PATH:/home/gautierk/.gem/ruby/2.7.0/bin
+export PATH
+
+# better yaourt colors
+export YAOURT_COLORS="nb=1:pkg=1:ver=1;32:lver=1;45:installed=1;42:grp=1;34:od=1;41;5:votes=1;44:dsc=0:other=1;35"
+
+# change TEXMFHOME to a dot directory
+export TEXMFHOME=$HOME/.texmf
+export TEXINPUTS=/home/gautierk/.texmf//:
+
+export GOOGLE_APPLICATION_CREDENTIALS="/home/gautierk/.keys/artifai-graphql.json"
 
 # Default programs:
 export EDITOR="nvim"
 export TERMINAL="st"
-export BROWSER="brave"
+export BROWSER="firefox"
 export READER="zathura"
+
+export JA_GTC_SOURCE='en'
+export JA_GTC_TARGET='fr'
 
 # ~/ Clean-up:
 export XDG_CONFIG_HOME="$HOME/.config"
