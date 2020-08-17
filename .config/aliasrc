@@ -3,7 +3,8 @@
 # Use neovim for vim if present.
 command -v nvim >/dev/null && alias vim="nvim" vimdiff="nvim -d"
 
-alias rtranslate="translate -s fr -t en"
+alias translate="translate -s en -d fr"
+alias rtranslate="translate -s fr -d en"
 
 # Verbosity and settings that you pretty much just always are going to want.
 alias \

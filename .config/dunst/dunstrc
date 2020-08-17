@@ -450,7 +450,7 @@
     browser = /usr/bin/google-chrome-beta -new-tab
     icon_position = left
     # icon_folders = /usr/share/icons/Notifications
-    icon_path = /usr/share/icons/Paper/24x24/status:/usr/share/icons/Paper/24x24/panel:/usr/share/icons/Paper/24x24/actions
+    icon_path = /usr/share/icons/Paper/24x24/status:/usr/share/icons/Paper/24x24/panel:/usr/share/icons/Paper/24x24/devices:/usr/share/icons/Paper/24x24/actions:/usr/share/icons/Adwaita/16x16/status/:/usr/share/icons/Adwaita/16x16/devices/
 
 [frame]
     color = "#333333"
@@ -460,7 +460,7 @@
     close = ctrl+space
     close_all = ctrl+shift+space
     context = ctrl+shift+period
-    history = ctrl+shift+h
+    # history = ctrl+shift+h
 
 [urgency_low]
     background = "#ffffff"

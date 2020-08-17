@@ -76,7 +76,7 @@ bindsym $mod+Shift+q kill
 # bindsym $mod+d exec --no-startup-id dmenu_recency
 bindsym $mod+d exec --no-startup-id rofi -show run
 # bindsym $mod+d exec --no-startup-id zsh -c "rofi -show run" # -lines 10 -eh 2 -width 30 -padding 800 -font "Cantarell 11"
-bindsym $mod+Shift+s exec /home/gautierk/.local/bin/scripts/rofi_script_launcher.sh
+# bindsym $mod+Shift+s exec /home/gautierk/.local/bin/scripts/rofi_script_launcher.sh
 # bindsym $mod+Shift+v --release exec "st -e 'cd Projects'"
 bindsym $mod+Shift+v exec "/home/gautierk/.local/bin/scripts/vide_launcher.sh"
 # bindsym $mod+Shift+v exec "/home/gautierk/.local/bin/scripts/vide_launcher.sh"
@@ -213,7 +213,7 @@ bindsym $mod+p exec keepmenu
 bindsym $mod+c exec "APP=\\"google-calendar\\"; CLASS=\\"google-calendar-nativefier-e22938\\"; if pgrep -x \\"google-calendar\\" > /dev/null 2>&1; then i3-msg workspace $wsCalendar; else google-calendar; fi"
 bindsym $mod+s exec "APP=\\"slack\\"; CLASS=\\"Slack\\"; if pgrep -x \\"$APP\\" > /dev/null 2>&1; then i3-msg \\"[class=\\"$CLASS\\"] scratchpad show\\"; else \\"$APP\\"; fi"
 bindsym $mod+Shift+d exec "APP=\\"discord\\"; CLASS=\\"discord\\"; if pgrep -x \\"Discord\\" > /dev/null 2>&1; then i3-msg \\"[class=\\"$CLASS\\"] scratchpad show\\"; else \\"$APP\\"; fi"
-bindsym $mod+v exec ~/.local/bin/scripts/ncmpcpp_toggle.sh
+# bindsym $mod+v exec ~/.local/bin/scripts/ncmpcpp_toggle.sh
 # "if pgrep -x ncmpcpp > /dev/null 2>&1; then i3-msg [instance=\\"music\\"] scratchpad show; else st -n music -e ncmpcpp && sleep 0.5; i3-msg [instance=\\"music\\"] scratchpad show; fi"
 # bindsym $mod+Shift+c exec "if pgrep -fx 'urxvt -name calendar' > /dev/null 2>&1; then i3-msg [instance=\\"calendar\\"] scratchpad show; else urxvt -name calendar && sleep 0.5; i3-msg [instance=\\"calendar\\"] scratchpad show; fi"
 bindsym $mod+Shift+Return exec "~/.local/bin/scripts/floater-toggle.sh"
@@ -260,10 +260,10 @@ set $ws4 4
 set $ws5 5
 set $ws6 6
 set $ws7 7
-set $ws8 8
+set $ws8 8:Emacs
 set $wsMail 10:Mail
 set $wsCalendar 11:Calendar
-set $wsVoice 12:Social
+set $wsSocial 12:Social
 set $wsNews 13:News
 set $wsTodo 14:Todo
 set $wsJournal 15:Journal
@@ -271,9 +271,6 @@ set $wsMcGill 16:McGill
 set $wsNotes 17:Notes
 set $wsLibravos 18:Libravos
 set $wsTranslate 18:Translate
-# set $wsCalcurseMcGill 150:
-# set $wsCalcurseGeneral 151:
-# set $wsCalcurseComputer 152:
 
 
 # switch to workspace
@@ -285,7 +282,7 @@ bindsym $mod+5 workspace $ws5
 bindsym $mod+6 workspace $ws6
 bindsym $mod+7 workspace $ws7
 bindsym $mod+8 workspace $ws8
-bindsym $mod+Shift+m workspace $wsVoice
+bindsym $mod+Shift+s workspace $wsSocial
 # bindsym $mod+Shift+v workspace $wsLibravos
 # bindsym $mod+Shift+t workspace $wsTranslate
 bindsym $mod+Shift+n workspace $wsNews
@@ -304,7 +301,7 @@ bindsym $mod+Ctrl+5 move container to workspace $ws5
 bindsym $mod+Ctrl+6 move container to workspace $ws6
 bindsym $mod+Ctrl+7 move container to workspace $ws7
 bindsym $mod+Ctrl+8 move container to workspace $ws8
-bindsym $mod+Ctrl+Shift+m move container to workspace $wsVoice
+bindsym $mod+Ctrl+Shift+m move container to workspace $wsSocial
 bindsym $mod+Ctrl+Shift+v move container to workspace $wsLibravos
 bindsym $mod+Ctrl+Shift+t move container to workspace $wsTranslate
 bindsym $mod+Ctrl+Shift+n move container to workspace $wsNotes
@@ -325,7 +322,7 @@ bindsym $mod+Shift+7 move container to workspace $ws7; workspace $ws7
 bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
 bindsym $mod+Shift+semicolon move container to workspace $wsMcGill; workspace $wsMcGill
 # bindsym $mod+Shift+n move container to workspace $wsNotes; workspace $wsNotes
-# bindsym $mod+Shift+Shift+m move container to workspace $wsVoice; workspace $wsVoice
+# bindsym $mod+Shift+Shift+m move container to workspace $wsSocial; workspace $wsSocial
 # bindsym $mod+Shift+Shift+n move container to workspace $wsNews; workspace $wsNews
 # bindsym $mod+Shift+Shift+d move container to workspace $wsTodo; workspace $wsTodo
 
@@ -529,7 +526,7 @@ mode "Calendar" {
 
 # Lock screen
 # exec --no-startup-id betterlockscreen -w dim
-bindsym $mod+9 exec --no-startup-id ponymix mute; exec ~/.local/bin/scripts/bluetooth_connect.sh; exec betterlockscreen -s
+bindsym $mod+Shift+9 exec --no-startup-id ponymix mute; exec ~/.local/bin/scripts/bluetooth_connect.sh; exec betterlockscreen -s
 
 # Autostart applications
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
@@ -538,6 +535,7 @@ exec --no-startup-id nm-applet
 exec --no-startup-id xfce4-power-manager
 exec --no-startup-id pamac-tray
 exec --no-startup-id clipit
+exec --no-startup-id safeeyes
 # exec --no-startup-id keepass
 exec_always --no-startup-id python ~/.local/bin/scripts/i3-swallow.py
 # exec --no-startup-id google-calendar
