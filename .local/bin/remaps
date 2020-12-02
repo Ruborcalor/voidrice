@@ -9,7 +9,7 @@ setxkbmap -option "caps:escape" -option "compose:ralt"
 # But when it is pressed only once, treat it as escape.
 # killall xcape 2>/dev/null ; xcape -e 'Super_L=Escape'
 # Map the menu button to right super as well.
-xmodmap -e 'keycode 135 = Super_R'
+xmodmap -e 'keycode 135 = Super_L'
 
-# Map the printscreen button to right super as well
-xmodmap -e 'keycode 107 = Super_R'
+# # Map the printscreen button to right super as well
+# xmodmap -e 'keycode 107 = Super_R'

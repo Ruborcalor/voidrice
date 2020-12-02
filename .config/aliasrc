@@ -3,6 +3,8 @@
 # Use neovim for vim if present.
 command -v nvim >/dev/null && alias vim="nvim" vimdiff="nvim -d"
 
+alias glist="gcloud compute instances list"
+alias gssh="gcloud compute ssh"
 alias translate="translate -s en -d fr"
 alias rtranslate="translate -s fr -d en"
 

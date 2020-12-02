@@ -220,6 +220,7 @@ bindsym $mod+Shift+Return exec "~/.local/bin/scripts/floater-toggle.sh"
 #"if pgrep -fx 'st -n floater' > /dev/null 2>&1; then i3-msg [instance=\\"floater\\"] scratchpad show; else st -n floater && sleep 0.5; i3-msg [instance=\\"floater\\"] scratchpad show; fi"
 # bindsym $mod+m exec "if pgrep -x neomutt > /dev/null 2>&1; then i3-msg [instance=\\"mail\\"] scratchpad show; else urxvt -name mail -e neomutt && sleep 0.5; i3-msg [instance=\\"mail\\"] scratchpad show; fi"
 bindsym $mod+m exec "~/.local/bin/scripts/mail-toggle.sh"
+bindym $mod+Shift+a
  bindsym $mod+Shift+o exec "APP=\\"ckillian-openauth.sh\\"; CLASS=\\"AuthenticatorGUI\\"; if pgrep -f \\"$APP\\" > /dev/null 2>&1; then i3-msg \\"[class=\\"$CLASS\\"] scratchpad show\\"; else exec /usr/bin/ckillian-openauth.sh; fi"
 # bindsym $mod+Shift+o exec "if pgrep -f JAuth.jar > /dev/null 2>&1; then i3-msg [class=\\"AuthenticatorGUI\\"] scratchpad show; else \\"ckillian-openauth.sh\\" && sleep 0.5; i3-msg [class=\\"AuthenticatorGUI\\"] scratchpad show; fi"
 # bindsym $mod+Shift+o exec "if pgrep -x JAuth.jar > /dev/null 2>&1; then i3-msg [class=AuthenticatorGUI] scratchpad show; else notify-send hello; fi"
@@ -264,6 +265,7 @@ set $ws8 8:Emacs
 set $wsMail 10:Mail
 set $wsCalendar 11:Calendar
 set $wsSocial 12:Social
+set $wsAnki 13:Anki
 set $wsNews 13:News
 set $wsTodo 14:Todo
 set $wsJournal 15:Journal
@@ -283,6 +285,7 @@ bindsym $mod+6 workspace $ws6
 bindsym $mod+7 workspace $ws7
 bindsym $mod+8 workspace $ws8
 bindsym $mod+Shift+s workspace $wsSocial
+bindsym $mod+Shift+a workspace $wsAnki
 # bindsym $mod+Shift+v workspace $wsLibravos
 # bindsym $mod+Shift+t workspace $wsTranslate
 bindsym $mod+Shift+n workspace $wsNews
@@ -302,6 +305,7 @@ bindsym $mod+Ctrl+6 move container to workspace $ws6
 bindsym $mod+Ctrl+7 move container to workspace $ws7
 bindsym $mod+Ctrl+8 move container to workspace $ws8
 bindsym $mod+Ctrl+Shift+m move container to workspace $wsSocial
+bindsym $mod+Ctrl+Shift+a move container to workspace $wsAnki
 bindsym $mod+Ctrl+Shift+v move container to workspace $wsLibravos
 bindsym $mod+Ctrl+Shift+t move container to workspace $wsTranslate
 bindsym $mod+Ctrl+Shift+n move container to workspace $wsNotes
@@ -383,6 +387,7 @@ for_window [instance="hangups"] move container to scratchpad
 for_window [instance="floater"] move container to scratchpad
 # for_window [instance="mail"] move container to scratchpad, fullscreen
 assign [instance="mail"] $wsMail
+assign [instance="Mail"] $wsMail
 assign [instance="calcurseMcGill"] $wsCalcurseMcGill
 assign [instance="calcurseGeneral"] $wsCalcurseGeneral
 assign [instance="calcurseComputer"] $wsCalcurseComputer
@@ -536,6 +541,7 @@ exec --no-startup-id xfce4-power-manager
 exec --no-startup-id pamac-tray
 exec --no-startup-id clipit
 exec --no-startup-id safeeyes
+exec --no-startup-id xflux -z 02139
 # exec --no-startup-id keepass
 exec_always --no-startup-id python ~/.local/bin/scripts/i3-swallow.py
 # exec --no-startup-id google-calendar
@@ -550,7 +556,7 @@ exec --no-startup-id /usr/lib/kdeconnect-indicator
 # exec_always --no-startup-id sbxkb
 exec --no-startup-id start_conky_maia
 # exec --no-startup-id start_conky_green
-exec --no-startup-id xautolock -time 10 -locker "betterlockscreen -s" -detectsleep
+# exec --no-startup-id xautolock -time 10 -locker "betterlockscreen -s" -detectsleep
 exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id fix_xcursor
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
