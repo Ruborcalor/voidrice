@@ -63,7 +63,7 @@ font-3 = "Twitter Color Emoji:style=Regular:size=5;0"
 ; font-3 = "Noto Color Emoji:style=Regular:size=-40;0"
 modules-left = i3 
 modules-center = mpd 
-modules-right = updates-arch-combined openweathermap-fullfeatured pulseaudio memory cpu batteryBAT1 batteryBAT0 date 
+modules-right = pomodoro updates-arch-combined openweathermap-fullfeatured pulseaudio memory cpu batteryBAT1 batteryBAT0 date 
 ; xbacklight wlan eth filesystem temperature powermenu batteryBAT0 
 ; system-bluetooth-bluetoothctl
 
@@ -452,5 +452,11 @@ click-left = ~/.local/bin/scripts/system-bluetooth-bluetoothctl.sh --toggle &
 type = custom/script
 exec = ~/.local/bin/scripts/updates-arch-combined.sh
 interval = 600
+
+[module/pomodoro]
+type = custom/script
+exec = ~/.local/bin/scripts/pomodoro-bar.sh
+interval = 5
+
 
 ; vim:ft=dosini

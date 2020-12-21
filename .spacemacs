@@ -39,7 +39,7 @@ This function should only modify configuration layer settings."
      typescript
      vimscript
      auto-completion
-     ocaml
+     (ocaml :variables ocaml-format-on-save t)
      ;; spacemail
      (mu4e :variables mu4e-spacemacs-layout-name "@Mu4e"
            mu4e-spacemacs-layout-binding "m"
@@ -838,6 +838,29 @@ before packages are loaded."
     :demand t ; make sure it is loaded
     )
 
+  (use-package org-pomodoro
+    :ensure t
+    :commands (org-pomodoro)
+    :config
+    (setq
+     alert-user-configuration (quote ((((:category . "org-pomodoro")) libnotify nil)))
+     org-pomodoro-length 50
+     org-pomodoro-short-break-length 10
+     ))
+
+  (defun dakra/org-pomodoro-text-time ()
+    "Display remaining pomodoro time in i3 status bar."
+    (if (org-pomodoro-active-p)
+        (cl-case org-pomodoro-state
+          (:pomodoro
+             (format "Pomo: %d minutes - %s" (/ (org-pomodoro-remaining-seconds) 60) org-clock-heading))
+          (:short-break
+           (format "Short break time: %d minutes" (/ (org-pomodoro-remaining-seconds) 60)))
+          (:long-break
+           (format "Long break time: %d minutes" (/ (org-pomodoro-remaining-seconds) 60)))
+          (:overtime
+           (format "Overtime! %d minutes" (/ (org-pomodoro-remaining-seconds) 60))))
+      "No active pomo"))
 
   (with-eval-after-load "ox-latex"
     (add-to-list 'org-latex-classes
