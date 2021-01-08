@@ -85,6 +85,7 @@ This function should only modify configuration layer settings."
           org-enable-reveal-js-support t
           org-enable-org-journal-support t
           org-enable-hugo-support t
+          org-enable-roam-support t
           org-project-file ".projects"
           org-want-todo-bindings t)
      (shell :variables
@@ -119,7 +120,6 @@ This function should only modify configuration layer settings."
                                       org-super-agenda
                                       org-roam
                                       org-noter
-                                      company-org-roam
                                       org-gcal
                                       react-snippets
                                       )
@@ -848,8 +848,8 @@ before packages are loaded."
      org-pomodoro-short-break-length 10
      ))
 
-  (defun dakra/org-pomodoro-text-time ()
-    "Display remaining pomodoro time in i3 status bar."
+  (defun ruborcalor/org-pomodoro-time ()
+    "Return the remaining pomodoro time"
     (if (org-pomodoro-active-p)
         (cl-case org-pomodoro-state
           (:pomodoro
@@ -1003,6 +1003,7 @@ before packages are loaded."
 
   (with-eval-after-load 'org
     (setq org-directory "~/.org")
+    (setq org-roam-directory "~/.org/roam")
     (setq org-use-fast-todo-selection t)
     (setq org-journal-dir "~/.org/journal")
     (setq org-default-notes-file "~/.org/agenda/inbox.org")
@@ -1022,7 +1023,7 @@ before packages are loaded."
 
     (defun org-hugo-new-subtree-post-capture-template ()
       "Returns `org-capture' template string for new Hugo post.
-See `org-capture-templates' for more information."
+       See `org-capture-templates' for more information."
       (let* ((title (read-from-minibuffer "Post Title: ")) ;Prompt to enter the post title
              (fname (org-hugo-slug title)))
         (mapconcat #'identity
@@ -1036,44 +1037,47 @@ See `org-capture-templates' for more information."
                    "\n")))
 
 
-    (use-package company-org-roam
-      :ensure t
-      ;; You may want to pin in case the version from stable.melpa.org is not working 
-                                        ; :pin melpa
-      :config
-      (push 'company-org-roam company-backends))
-
-    (require 'org-tempo)
-    (require 'org-protocol)
-    (require 'org-roam-protocol)
+    ;; (require 'org-tempo)
+    ;; (require 'org-protocol)
+    ;; (require 'org-roam-protocol)
 
     (add-to-list 'org-modules 'org-protocol)
     (add-to-list 'org-modules 'org-habit)
 
     (use-package org-roam
       :ensure t
-      :hook
-      (after-init . org-roam-mode)
       :custom
       (org-roam-directory "/home/gautierk/.org/roam/")
-      :init
-      (progn
-        ;; (spacemacs/declare-prefix "af" "org-roam")
-        (spacemacs/set-leader-keys
-          "afl" 'org-roam
-          "aft" 'org-roam-dailies-today
-          "aff" 'org-roam-find-file
-          "afg" 'org-roam-graph)
+      :config
+      (setq org-roam-completion-everywhere t)
+      )
 
-        ;; (spacemacs/declare-prefix-for-mode 'org-mode "mr" "org-roam")
-        (spacemacs/set-leader-keys-for-major-mode 'org-mode
-          "fl" 'org-roam
-          "ft" 'org-roam-dailies-today
-          "fb" 'org-roam-switch-to-buffer
-          "ff" 'org-roam-find-file
-          "fi" 'org-roam-insert
-          "fI" 'org-roam-insert-immediate
-          "fg" 'org-roam-graph)))
+    ;; (use-package org-roam
+    ;;   :ensure t
+    ;;   :hook
+    ;;   (after-init . org-roam-mode)
+    ;;   :custom
+    ;;   (org-roam-directory "/home/gautierk/.org/roam/")
+    ;;   :config
+    ;;   (setq org-roam-completion-everywhere t)
+    ;;   :init
+    ;;   (progn
+    ;;     ;; (spacemacs/declare-prefix "af" "org-roam")
+    ;;     (spacemacs/set-leader-keys
+    ;;       "afl" 'org-roam
+    ;;       "aft" 'org-roam-dailies-today
+    ;;       "aff" 'org-roam-find-file
+    ;;       "afg" 'org-roam-graph)
+
+    ;;     ;; (spacemacs/declare-prefix-for-mode 'org-mode "mr" "org-roam")
+    ;;     (spacemacs/set-leader-keys-for-major-mode 'org-mode
+    ;;       "fl" 'org-roam
+    ;;       "ft" 'org-roam-dailies-today
+    ;;       "fb" 'org-roam-switch-to-buffer
+    ;;       "ff" 'org-roam-find-file
+    ;;       "fi" 'org-roam-insert
+    ;;       "fI" 'org-roam-insert-immediate
+    ;;       "fg" 'org-roam-graph)))
 
     ;; (use-package org-roam-server
     ;;   :ensure t
@@ -1356,7 +1360,7 @@ This function is called at the very end of Spacemacs initialization."
  '(evil-want-Y-yank-to-eol nil)
  '(helm-completion-style 'emacs)
  '(org-agenda-files
-   '("~/.org/agenda/inbox.org" "~/.org/agenda/todo.org" "~/.org/agenda/school.org" "~/.org/agenda/work.org" "~/.org/agenda/timetracking.org" "~/.org/agenda/all-posts.org" "~/.org/agenda/projects.org"))
+   '("~/.org/dailystory.org" "~/.org/agenda/inbox.org" "~/.org/agenda/todo.org" "~/.org/agenda/school.org" "~/.org/agenda/work.org" "~/.org/agenda/timetracking.org" "~/.org/agenda/all-posts.org" "~/.org/agenda/projects.org"))
  '(org-gcal-recurring-events-mode 'nested)
  '(org-latex-default-packages-alist
    '(("AUTO" "inputenc" t
@@ -1392,5 +1396,6 @@ This function is called at the very end of Spacemacs initialization."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(company-tooltip-common ((t (:inherit company-tooltip :weight bold :underline nil))))
+ '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil)))))
 )

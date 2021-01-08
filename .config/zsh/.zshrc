@@ -136,3 +136,9 @@ if [ -f '/home/gautierk/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/ga
 stty -ixon
 
 unset zle_bracketed_paste
+
+# opam configuration
+test -r /home/gautierk/.opam/opam-init/init.zsh && . /home/gautierk/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+
+# init nvm
+source /usr/share/nvm/init-nvm.sh
